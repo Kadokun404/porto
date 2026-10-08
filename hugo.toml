@@ -1,0 +1,43 @@
+baseURL = 'https://www.kadokunn.com/'
+languageCode = 'id'
+title = 'Kadokun'
+theme = 'brutalism-kadokun'
+
+[params]
+  author = "Kadokun"
+  company = "Kadokun Entertainment"
+  description = "crawling towards the light."
+  hero_title = "Halo.\nAku Kadokun."
+  hero_image = "/images/hero-avatar.svg"
+  logo = "/images/logo-icon.svg"
+  action_link = "https://wa.me/6282156985894"
+  action_text = "Chat WhatsApp"
+  music_link = "https://music.kadokunn.com"
+  music_text = "Mau dengerin music? 🎧"
+
+[params.social]
+  whatsapp  = "https://wa.me/6282156985894"
+  telegram  = "https://t.me/kadokunn"
+  x         = "https://x.com/kadokunnsh"
+  instagram = "https://instagram.com/kadokunnsh"
+
+[menu]
+  [[menu.main]]
+    name = "Projects"
+    url = "/projects/"
+    weight = 1
+  [[menu.main]]
+    name = "Blog"
+    url = "/blog/"
+    weight = 2
+  [[menu.main]]
+    name = "About"
+    url = "/about/"
+    weight = 3
+  [[menu.main]]
+    name = "Contact"
+    url = "/contact/"
+    weight = 4
+
+[markup.goldmark.renderer]
+  unsafe = true

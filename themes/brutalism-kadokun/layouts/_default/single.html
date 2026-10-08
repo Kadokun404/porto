@@ -1,0 +1,65 @@
+{{ define "main" }}
+<div class="page-header">
+  <div class="container">
+    <h1>{{ .Title }}</h1>
+    {{ if .Params.tagline }}
+    <p style="margin-top: 1rem; font-weight: bold; font-size: 1.25rem;">{{ .Params.tagline }}</p>
+    {{ else if .Description }}
+    <p style="margin-top: 1rem; font-weight: bold; font-size: 1.1rem;">{{ .Description }}</p>
+    {{ else if ne .Type "page" }}
+    <p style="margin-top: 1rem; font-weight: bold;">{{ .Date.Format "January 2, 2006" }}</p>
+    {{ end }}
+  </div>
+</div>
+
+<article class="page-content window-card no-hover" style="margin-top: -2rem; margin-bottom: 4rem; position: relative; z-index: 10; background: #fff; padding: 0;">
+  <div class="window-header">
+    <div class="window-controls">
+      <div class="window-dot mac-red" title="Close"></div>
+      <div class="window-dot mac-yellow" title="Minimise"></div>
+      <div class="window-dot mac-green" title="Maximise"></div>
+    </div>
+    <div class="window-title">{{ .Date.Format "2006-01-02" }}-{{ .File.TranslationBaseName }}.html</div>
+  </div>
+  {{ if .Params.image }}
+  <img src="{{ .Params.image | relURL }}" alt="{{ .Title }}" class="window-image" loading="lazy" decoding="async" style="border-bottom: 3px solid #000; filter: none;">
+  {{ end }}
+  <div class="window-body" style="padding: 3rem;">
+    {{ .Content }}
+  </div>
+</article>
+
+{{/* Related Posts Section */}}
+{{ $currentPage := . }}
+{{ $related := where (where .Site.RegularPages "Type" .Type) ".Permalink" "ne" .Permalink | first 3 }}
+{{ if $related }}
+<section class="projects-section reveal-on-scroll" style="background-color: var(--bg-color); border-top: var(--border-width) solid var(--border-color);">
+  <div class="container">
+    <h2 class="section-title">You might also like</h2>
+    <div class="projects-grid">
+      {{ range $related }}
+      <article class="window-card">
+        <div class="window-header">
+          <div class="window-controls">
+            <div class="window-dot"></div>
+            <div class="window-dot"></div>
+          </div>
+          <div class="window-title">{{ .Date.Format "2006-01-02" }}-{{ .File.TranslationBaseName }}.html</div>
+        </div>
+        {{ if .Params.image }}
+        <img src="{{ .Params.image | relURL }}" alt="{{ .Title }}" class="window-image" loading="lazy" decoding="async">
+        {{ else }}
+        <div class="window-image" style="background-color: var(--color-blue);"></div>
+        {{ end }}
+        <div class="window-body">
+          <h3>{{ .Title }}</h3>
+          <p>{{ .Summary | truncate 120 }}</p>
+          <a href="{{ .Permalink }}" class="button">{{ if eq .Type "blog" }}Read article{{ else }}View project{{ end }}</a>
+        </div>
+      </article>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}
+{{ end }}

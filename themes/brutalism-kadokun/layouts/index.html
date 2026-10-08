@@ -1,0 +1,98 @@
+{{ define "main" }}
+<section class="hero reveal-on-scroll">
+  <div class="container" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+    <div class="hero-content">
+      <h1>{{ .Site.Params.hero_title }}</h1>
+      <p>{{ .Site.Params.description }}</p>
+      <div class="hero-actions">
+        {{ if .Site.Params.action_link }}
+        <a href="{{ .Site.Params.action_link }}" class="button">{{ .Site.Params.action_text }}</a>
+        {{ end }}
+        {{ if .Site.Params.music_link }}
+        <a href="{{ .Site.Params.music_link }}" target="_blank" rel="noopener" class="button button-music">{{ .Site.Params.music_text }}</a>
+        {{ end }}
+      </div>
+    </div>
+    <div class="hero-image">
+      {{ $heroImage := .Site.Params.hero_image | default "/images/hero-avatar.svg" }}
+      <img src="{{ $heroImage | relURL }}" alt="Hero Avatar" class="hero-avatar" decoding="async">
+    </div>
+  </div>
+</section>
+
+<section class="quick-links-wrapper reveal-on-scroll">
+  <div class="container">
+    <h2 class="section-title">Quick links</h2>
+    <div class="quick-links">
+      <a href="{{ "blog/" | relURL }}" class="quick-link">Blog <span>&#8599;</span></a>
+      <a href="{{ "projects/" | relURL }}" class="quick-link">Projects <span>&#8599;</span></a>
+      <a href="{{ "about/" | relURL }}" class="quick-link">About <span>&#8599;</span></a>
+      <a href="{{ "contact/" | relURL }}" class="quick-link">Contact <span>&#8599;</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="projects-section reveal-on-scroll">
+  <div class="container">
+    <h2 class="section-title">Recent Projects</h2>
+    <div class="projects-slider">
+      {{ range first 5 (where .Site.RegularPages "Type" "projects") }}
+      <article class="window-card">
+        <div class="window-header">
+          <div class="window-controls">
+            <div class="window-dot"></div>
+            <div class="window-dot"></div>
+          </div>
+          <div class="window-title">{{ .Params.date.Format "2006-01-02" }}-{{ .File.TranslationBaseName }}.html</div>
+        </div>
+        {{ if .Params.image }}
+        <img src="{{ .Params.image | relURL }}" alt="{{ .Title }}" class="window-image" loading="lazy" decoding="async">
+        {{ else }}
+        <div class="window-image" style="background-color: var(--color-pink);"></div>
+        {{ end }}
+        <div class="window-body">
+          <h3>{{ .Title }}</h3>
+          <p>{{ .Summary | truncate 150 }}</p>
+          <a href="{{ .Permalink }}" class="button">View project</a>
+        </div>
+      </article>
+      {{ end }}
+    </div>
+    <div style="text-align: center; margin-top: 4rem;">
+      <a href="{{ "projects/" | relURL }}" class="button">View all projects</a>
+    </div>
+  </div>
+</section>
+
+<section class="projects-section reveal-on-scroll" style="background-color: var(--color-white); border-top: var(--border-width) solid var(--border-color);">
+  <div class="container">
+    <h2 class="section-title">Tulisan Terbaru</h2>
+    <div class="projects-slider">
+      {{ range first 5 (where .Site.RegularPages "Type" "blog") }}
+      <article class="window-card">
+        <div class="window-header">
+          <div class="window-controls">
+            <div class="window-dot"></div>
+            <div class="window-dot"></div>
+          </div>
+          <div class="window-title">{{ .Date.Format "2006-01-02" }}-{{ .File.TranslationBaseName }}.html</div>
+        </div>
+        {{ if .Params.image }}
+        <img src="{{ .Params.image | relURL }}" alt="{{ .Title }}" class="window-image" loading="lazy" decoding="async">
+        {{ else }}
+        <div class="window-image" style="background-color: var(--color-blue);"></div>
+        {{ end }}
+        <div class="window-body">
+          <h3>{{ .Title }}</h3>
+          <p>{{ .Summary | truncate 150 }}</p>
+          <a href="{{ .Permalink }}" class="button">Read article</a>
+        </div>
+      </article>
+      {{ end }}
+    </div>
+    <div style="text-align: center; margin-top: 4rem;">
+      <a href="{{ "blog/" | relURL }}" class="button">View all blog posts</a>
+    </div>
+  </div>
+</section>
+{{ end }}

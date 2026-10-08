@@ -1,0 +1,36 @@
+{{ define "main" }}
+<div class="page-header">
+  <div class="container">
+    <h1>{{ .Title }}</h1>
+    {{ if .Description }}<p style="font-size: 1.5rem; margin-top: 1rem">{{ .Description }}</p>{{ end }}
+  </div>
+</div>
+
+<section class="projects-section">
+  <div class="container">
+    <div class="projects-grid">
+      {{ range .Pages }}
+      <article class="window-card">
+        <div class="window-header">
+          <div class="window-controls">
+            <div class="window-dot"></div>
+            <div class="window-dot"></div>
+          </div>
+          <div class="window-title">{{ .Date.Format "2006-01-02" }}-{{ if .File }}{{ .File.TranslationBaseName }}{{ else }}{{ urlize .Title }}{{ end }}.html</div>
+        </div>
+        {{ if .Params.image }}
+        <img src="{{ .Params.image | relURL }}" alt="{{ .Title }}" class="window-image" loading="lazy" decoding="async">
+        {{ else }}
+        <div class="window-image" style="background-color: var(--color-blue);"></div>
+        {{ end }}
+        <div class="window-body">
+          <h3>{{ .Title }}</h3>
+          <p>{{ .Summary | truncate 150 }}</p>
+          <a href="{{ .Permalink }}" class="button">{{ if eq .Type "blog" }}Read article{{ else }}View project{{ end }}</a>
+        </div>
+      </article>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}

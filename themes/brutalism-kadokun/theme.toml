@@ -1,0 +1,8 @@
+name = "Brutalism Kadokun"
+license = "MIT"
+description = "Tema neobrutalism personal untuk Kadokun, dimodifikasi dari Brutalism-Wall oleh muhawaluddin."
+min_version = "0.120.0"
+
+[author]
+  name = "Kadokun"
+  homepage = "https://www.kadokunn.com"

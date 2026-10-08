@@ -1,0 +1,9 @@
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p>&copy; {{ now.Format "2006" }} {{ .Site.Params.company }}. Dibuat oleh {{ .Site.Params.author }}.</p>
+    {{ with .Site.Params.music_link }}<a href="{{ . }}" target="_blank" rel="noopener" class="button button-music" style="padding: 0.4rem 1rem; box-shadow: 3px 3px 0 var(--shadow-color);">{{ $.Site.Params.music_text }}</a>{{ end }}
+    <div class="footer-socials">
+      {{ partial "socials.html" (dict "ctx" . "size" 18 "pad" "0.5rem") }}
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,37 @@
+<header class="site-header">
+  <div class="container">
+    <div class="site-logo">
+      <a href="{{ .Site.BaseURL }}" style="display: flex; align-items: center;">
+        {{ with .Site.Params.logo }}
+        <img src="{{ . | relURL }}" alt="Logo" style="width: 24px; height: 24px; margin-right: 8px;">
+        {{ end }}
+        {{ .Site.Title }}
+      </a>
+      <button class="mobile-menu-toggle" aria-label="Toggle Menu" style="background: none; border: none; cursor: pointer; display: none;">
+        <svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      </button>
+    </div>
+    <nav class="site-nav">
+      <ul class="nav-links">
+        {{ range .Site.Menus.main }}
+        <li><a class="nav-link" href="{{ .URL }}">{{ .Name }}</a></li>
+        {{ end }}
+      </ul>
+      <div class="nav-socials">
+        {{ partial "socials.html" (dict "ctx" . "size" 24) }}
+      </div>
+    </nav>
+  </div>
+</header>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggle = document.querySelector('.mobile-menu-toggle');
+    const nav = document.querySelector('.site-nav');
+    if (toggle && nav) {
+      toggle.addEventListener('click', () => {
+        nav.classList.toggle('is-open');
+      });
+    }
+  });
+</script>
